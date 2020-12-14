@@ -1,12 +1,9 @@
 package com.example.farm.entities;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,23 +15,15 @@ public class Aviary {
     @ToString.Exclude
     private static final AtomicInteger counter = new AtomicInteger(1);
     @ToString.Exclude
-    private final List<Dog> dogs = new ArrayList<>();
+    @Getter
+    private final List<Dog> dogsWhoLiveHere;
     @Getter
     private final int ID;
 
-    {
+    public Aviary(List<Dog> dogsWhoLiveHere) {
+        this.dogsWhoLiveHere = dogsWhoLiveHere;
         this.ID = counter.getAndIncrement();
         log.info("Created {}", this);
-    }
-
-    public void addDogsToAviary(Dog ...dogsEnter) {
-        dogs.addAll(Arrays.asList(dogsEnter));
-    }
-
-    public List<Dog> getDogsFromAviary() {
-        List<Dog> temp = new ArrayList<>(dogs);
-        dogs.removeAll(temp);
-        return temp;
     }
 
     @Override

@@ -5,5 +5,6 @@ public enum Employee {
     CLEANER,
     TRAINER,
     CYNOLOGIST,
-    DOG_HUGGER
+    DOG_HUGGER,
+    COOK
 }

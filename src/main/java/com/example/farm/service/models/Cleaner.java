@@ -2,41 +2,38 @@ package com.example.farm.service.models;
 
 import com.example.farm.entities.Aviary;
 import com.example.farm.service.ServiceStaff;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import static com.google.common.base.Preconditions.*;
+
 @Slf4j
-public class Cleaner extends ServiceStaff implements Runnable {
+public class Cleaner extends ServiceStaff {
 
-    private final List<Aviary> cleanTarget = new ArrayList<>();
+    private final List<Aviary> cleanTarget;
 
-    public Cleaner() {
+    public Cleaner(List<Aviary> cleanTarget) {
         super("Cleaner");
+        this.cleanTarget = cleanTarget;
     }
 
+    @SneakyThrows
     @Override
-    public void run() {
+    public Boolean call() {
+
+//        long n = cleanTarget.stream()
+//                .filter(a -> a.getDogsWhoLiveHere().size() == 0)
+//                .count();
+//
+//        checkState(n == cleanTarget.size(), "Aviaries are not empty!");
+
         log.info("{} start cleaning...", this);
-
-        cleanTarget.forEach(x -> {
-            try {
-                TimeUnit.SECONDS.sleep(5);
-                log.info("Aviary #{} cleaned", x.getID());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        cleanTarget.clear();
+        TimeUnit.SECONDS.sleep(cleanTarget.size() * 5);
         log.info("{}: now everything shines!", this);
-    }
 
-
-    public void addObjToClean(Aviary ... aviaries) {
-        cleanTarget.addAll(Arrays.asList(aviaries));
+        return true;
     }
 }
