@@ -2,34 +2,38 @@ package com.example.farm.service.models;
 
 import com.example.farm.entities.Dog;
 import com.example.farm.service.ServiceStaff;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class Trainer extends ServiceStaff {
 
-    private final List<Dog> dogs;
+    @Setter
+    private Dog dog;
+    @Setter
+    private BlockingDeque<Trainer> trainers;
 
-    public Trainer(List<Dog> dogs) {
+    public Trainer() {
         super("Trainer");
-        this.dogs = dogs;
     }
 
     @SneakyThrows
     @Override
     public Boolean call() {
-        log.info("{} starts train naughty dogs!", this);
-        long counter = dogs.stream()
-                .filter(d -> !d.isAccustomed())
-                .peek(d -> d.setAccustomed(true))
-                .count();
-        TimeUnit.SECONDS.sleep(counter);
-        log.info("{}: now every dog is trained!)", this);
+        log.info("{} training a dog {}...", this, dog.getName());
 
+        dog.setAccustomed(true);
+        dog.setHungry(true);
+
+        TimeUnit.SECONDS.sleep(3);
+        log.info("{}: done!", this);
+
+        trainers.putLast(this);
         return true;
     }
+
 }

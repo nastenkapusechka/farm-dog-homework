@@ -1,11 +1,13 @@
 package com.example.farm.service.models;
 
-import com.example.farm.entities.Aviary;
+import com.example.farm.entities.Booth;
 import com.example.farm.service.ServiceStaff;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.*;
@@ -13,26 +15,25 @@ import static com.google.common.base.Preconditions.*;
 @Slf4j
 public class Cleaner extends ServiceStaff {
 
-    private final List<Aviary> cleanTarget;
+    @Setter
+    private Booth dirtyBooth;
 
-    public Cleaner(List<Aviary> cleanTarget) {
+    @Setter
+    private BlockingDeque<Cleaner> cleaners;
+
+    public Cleaner() {
         super("Cleaner");
-        this.cleanTarget = cleanTarget;
     }
 
     @SneakyThrows
     @Override
     public Boolean call() {
 
-//        long n = cleanTarget.stream()
-//                .filter(a -> a.getDogsWhoLiveHere().size() == 0)
-//                .count();
-//
-//        checkState(n == cleanTarget.size(), "Aviaries are not empty!");
-
-        log.info("{} start cleaning...", this);
-        TimeUnit.SECONDS.sleep(cleanTarget.size() * 5);
+        log.info("{} start cleaning booth #{}...", this, dirtyBooth.getID());
+        dirtyBooth.setDirty(false);
+        TimeUnit.SECONDS.sleep(3);
         log.info("{}: now everything shines!", this);
+        cleaners.putLast(this);
 
         return true;
     }

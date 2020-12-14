@@ -21,6 +21,7 @@ public class Dog {
     private final long ID = COUNTER.getAndIncrement();
     private String name;
     private int age;
+    private int boothId;
     private boolean isHungry;
     private boolean isHealthy;
     private boolean isHappy;

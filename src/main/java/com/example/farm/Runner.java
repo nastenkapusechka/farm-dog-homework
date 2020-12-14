@@ -1,26 +1,27 @@
 package com.example.farm;
 
-import com.example.farm.entities.Dog;
-import com.example.farm.factory.DogFactory;
+import com.example.farm.entities.Workforce;
+import com.example.farm.reflect.annotations.Dogs;
+import com.example.farm.reflect.configs.WorkforceConfiguration;
+import com.example.farm.reflect.Processor;
 
-public class Runner {
+public class Runner implements WorkforceConfiguration {
+
+    @Dogs
+    private final String[] names = {"Nancy", "Betty", "Tom", "Rex"};
+
     public static void main(String[] args) {
-        Dog nancy = DogFactory.getDog("Nancy");
-        Dog betty = DogFactory.getDog("Betty");
-        Dog rex = DogFactory.getDog("Rex");
-        Dog tom = DogFactory.getDog("Tom");
+        Processor.process(Runner.class);
+    }
 
-        System.out.println(nancy);
-        System.out.println(betty);
-        System.out.println(rex);
-        System.out.println(tom);
-
-        Farm farm = new Farm(nancy, betty, rex, tom);
-        farm.liveOneDay();
-
-        System.out.println(nancy);
-        System.out.println(betty);
-        System.out.println(rex);
-        System.out.println(tom);
+    @Override
+    public void configure(Workforce workforce) {
+        workforce
+                .cleaners(1)
+                .cookers(1)
+                .cynologists(1)
+                .dogHuggers(1)
+                .trainers(1)
+                .veterinarians(1);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.farm.service;
 
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,13 +10,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @ToString
+@NoArgsConstructor
 public class ServiceStaff implements Callable<Boolean> {
 
     @ToString.Exclude
-    AtomicInteger counter = new AtomicInteger(1);
+    private static final AtomicInteger counter = new AtomicInteger(1);
 
-    protected final int ID;
-    protected final String SPECIALIZATION;
+    protected int ID;
+    protected String SPECIALIZATION;
 
     public ServiceStaff(String SPECIALIZATION) {
         this.ID = counter.getAndIncrement();
