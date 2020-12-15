@@ -29,15 +29,4 @@ class FarmTest {
 
         dogs.forEach(d -> assertThat(d.getBoothId(), is(not(0))));
     }
-
-    @Test
-    public void testWork() {
-        List<Dog> dogs = Stream.of(
-                DogFactory.getDog("Nancy"),
-                DogFactory.getDog("Betty")
-        ).collect(Collectors.toList());
-
-        Farm farm = new Farm(workforce, dogs);
-
-    }
 }
