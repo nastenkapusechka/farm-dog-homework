@@ -21,7 +21,7 @@ public class Runner implements WorkforceConfiguration {
         workforce
                 .cleaners(2)
                 .cookers(2)
-                .cynologists(2)
+                .cynologists(2)//kinolog
                 .dogHuggers(4)
                 .trainers(3)
                 .veterinarians(2);

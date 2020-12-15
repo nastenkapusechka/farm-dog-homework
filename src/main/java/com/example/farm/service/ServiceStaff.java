@@ -1,5 +1,6 @@
 package com.example.farm.service;
 
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +16,7 @@ public class ServiceStaff implements Callable<Boolean> {
     private static final AtomicInteger counter = new AtomicInteger(1);
 
     protected int ID;
+    @Getter
     protected String SPECIALIZATION;
 
     public ServiceStaff(String SPECIALIZATION) {

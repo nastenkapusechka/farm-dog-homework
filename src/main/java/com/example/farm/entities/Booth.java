@@ -21,7 +21,7 @@ public class Booth {
     private final Dog dog;
     @Getter
     private final int ID = counter.getAndIncrement();
-    @Setter
+    @Setter @Getter
     private boolean isDirty;
 
     public Booth(Dog dog) {
