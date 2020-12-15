@@ -1,5 +1,6 @@
 package com.example.farm.entities;
 
+import com.example.farm.util.Ansi;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,12 +31,12 @@ public class Booth {
     }
 
     public void oldRelax() {
-        log.info("{} goes relax..", dog.getName());
+        log.info(Ansi.CYAN.code + "{} goes relax.." + Ansi.RESET.code, dog.getName());
         dog.setHungry(true);
     }
 
     public void goingSleep() {
-        log.info("{}: wof! wof! (good night)", dog.getName());
+        log.info(Ansi.BRIGHT_GREEN.code + "{}: wof! wof! (good night)" + Ansi.RESET.code, dog.getName());
         this.isDirty = true;
     }
 

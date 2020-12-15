@@ -2,15 +2,13 @@ package com.example.farm.service.models;
 
 import com.example.farm.entities.Booth;
 import com.example.farm.service.ServiceStaff;
+import com.example.farm.util.Ansi;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Preconditions.*;
 
 @Slf4j
 public class Cleaner extends ServiceStaff {
@@ -29,10 +27,10 @@ public class Cleaner extends ServiceStaff {
     @Override
     public Boolean call() {
 
-        log.info("{} start cleaning booth #{}...", this, dirtyBooth.getID());
+        log.info(Ansi.GREEN.code + "{} start cleaning booth #{}..." + Ansi.RESET.code, this, dirtyBooth.getID());
         dirtyBooth.setDirty(false);
-        TimeUnit.SECONDS.sleep(3);
-        log.info("{}: now everything shines!", this);
+        TimeUnit.SECONDS.sleep(6);
+        log.info(Ansi.GREEN.code + "{}: now everything shines!" + Ansi.RESET.code, this);
         cleaners.putLast(this);
 
         return true;

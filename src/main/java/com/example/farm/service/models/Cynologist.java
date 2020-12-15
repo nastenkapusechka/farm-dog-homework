@@ -2,6 +2,7 @@ package com.example.farm.service.models;
 
 import com.example.farm.entities.Dog;
 import com.example.farm.service.ServiceStaff;
+import com.example.farm.util.Ansi;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +27,10 @@ public class Cynologist extends ServiceStaff {
 
         if (workers.isEmpty()) return false;
 
-        log.info("{} takes dogs to work ... He has {} teammates!", this, workers.size());
+        log.info(Ansi.BRIGHT_YELLOW.code + "{} takes dogs to work ... He has {} teammates!" + Ansi.RESET.code, this, workers.size());
         workers.forEach(d -> d.setHungry(true));
-        TimeUnit.SECONDS.sleep(10);
-        log.info("{}: today was a nice day! Every dog has worked and they are so hungry!", this);
+        TimeUnit.SECONDS.sleep(20);
+        log.info(Ansi.BRIGHT_YELLOW.code + "{}: today was a nice day! Every dog has worked and they are so hungry!" + Ansi.RESET.code, this);
 
         return true;
     }

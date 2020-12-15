@@ -2,6 +2,7 @@ package com.example.farm.service.models;
 
 import com.example.farm.entities.Dog;
 import com.example.farm.service.ServiceStaff;
+import com.example.farm.util.Ansi;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +27,10 @@ public class DogHugger extends ServiceStaff {
     @SneakyThrows
     @Override
     public Boolean call() {
-        log.info("{} start to hug pretty {}..)", this, sadDog.getName());
+        log.info(Ansi.MAGENTA.code + "{} start to hug pretty {}..)" + Ansi.RESET.code, this, sadDog.getName());
         sadDog.setHappy(true);
-        TimeUnit.SECONDS.sleep(2);
-        log.info("{}: {} is happy now!))", this, sadDog.getName());
+        TimeUnit.SECONDS.sleep(6);
+        log.info(Ansi.MAGENTA.code + "{}: {} is happy now!))" + Ansi.RESET.code, this, sadDog.getName());
         huggers.putLast(this);
 
         return true;

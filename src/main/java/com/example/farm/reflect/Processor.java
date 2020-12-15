@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.*;
@@ -53,6 +54,9 @@ public final class Processor {
                 "Field should be String[]!");
 
         String[] names = (String[]) processedField.get(instance);
+
+        Arrays.stream(names).forEach(name -> checkArgument(!name.trim().equals(""),
+                "One of the names is empty!!"));
 
         for (String name : names) {
             dogs.add(DogFactory.getDog(name));
