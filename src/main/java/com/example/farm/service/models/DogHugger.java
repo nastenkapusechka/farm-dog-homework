@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-//в китае есть проессия - обниматель панд. У нас будет обниматель собак)) все любят обнимашки
+//in China there are a panda hugger profession. We will have a dog hugger)) everyone loves hugs
 @Slf4j
 public class DogHugger extends ServiceStaff {
 

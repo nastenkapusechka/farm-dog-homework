@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
+/**
+ * it is a stand alone class which distribute dogs to trainers. Trainer is a class
+ * which trainee a dog and makes it accustomed)
+ * @see com.example.farm.strategy.impl - similar classes
+ */
 public class TrainingPlayground implements Callable<Boolean> {
 
     private final ConcurrentLinkedDeque<Dog> dogs;

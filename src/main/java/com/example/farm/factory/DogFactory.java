@@ -5,6 +5,8 @@ import com.example.farm.util.AgeStatus;
 
 import java.util.Random;
 
+//dog is a plain class, it contains only information, without logic,
+//so, i made a factory which instantiate dogs:)
 public final class DogFactory {
 
     public static Dog getDog(String name) {

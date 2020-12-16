@@ -15,7 +15,7 @@ public class Runner implements WorkforceConfiguration {
         Processor.process(Runner.class);
     }
 
-    //здесь мона настроить сколько и какой персонал будет работать в питомнике
+    //here you can declare your service staff
     @Override
     public void configure(Workforce workforce) {
         workforce

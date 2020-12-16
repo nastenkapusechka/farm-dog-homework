@@ -66,6 +66,8 @@ public class Farm {
         TimeUnit.SECONDS.sleep(1);
         System.out.println();
 
+        //i would like to create a similar "TrainingStrategy" for trainers,
+        //but requirement was stronger than me!
         Future<Boolean> task = service.submit(trainingPlayground);
         task.get();
         TimeUnit.SECONDS.sleep(1);

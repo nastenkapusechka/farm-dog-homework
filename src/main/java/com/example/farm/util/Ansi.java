@@ -1,5 +1,6 @@
 package com.example.farm.util;
 
+//so i really sad that you will not run this app! This enum colors console output
 public enum Ansi {
 
     GREEN("\u001B[32m"),
