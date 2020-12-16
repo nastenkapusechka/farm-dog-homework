@@ -5,6 +5,7 @@ import com.example.farm.entities.Farm;
 import com.example.farm.entities.Workforce;
 import com.example.farm.factory.DogFactory;
 import com.example.farm.reflect.annotations.Dogs;
+import lombok.NonNull;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
@@ -28,7 +29,7 @@ public final class Processor {
     }
 
     @SneakyThrows
-    private static void init(Class<?> clazz) {
+    private static void init(@NonNull Class<?> clazz) {
 
         Object instance = clazz.getDeclaredConstructor().newInstance();
 
@@ -48,12 +49,14 @@ public final class Processor {
                 break;
             }
         }
-        assert processedField != null;
-
+        checkArgument(processedField != null, "Field is not exist or not " +
+                "annotated by @Dogs annotation!");
         checkArgument(processedField.get(instance) instanceof String[],
-                "Field should be String[]!");
+                "Field should be String[]! (maybe it is null?)");
 
         String[] names = (String[]) processedField.get(instance);
+
+        checkArgument(names.length != 0, processedField.getName() + " is empty!");
 
         Arrays.stream(names).forEach(name -> checkArgument(!name.trim().equals(""),
                 "One of the names is empty!!"));
